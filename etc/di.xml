@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="MagentoHackathon\Toolbar\API\ToolbarStateInterface"
-                type="MagentoHackathon\Toolbar\Provider\StateProvider" />
+    <preference for="Fruitcake\MagentoDebugbar\API\DebugbarStateInterface"
+                type="Fruitcake\MagentoDebugbar\Provider\StateProvider" />
 
     <type name="Magento\Framework\AppInterface">
-        <plugin name="MagentoHackathon\Toolbar\Plugin\AddMagentoCollectorPlugin"
-                type="MagentoHackathon\Toolbar\Plugin\AddMagentoCollectorPlugin"
+        <plugin name="Fruitcake\MagentoDebugbar\Plugin\AddMagentoCollectorPlugin"
+                type="Fruitcake\MagentoDebugbar\Plugin\AddMagentoCollectorPlugin"
                 sortOrder="100" />
-        <plugin name="MagentoHackathon\Toolbar\Plugin\AddMessagesCollectorPlugin"
-                type="MagentoHackathon\Toolbar\Plugin\AddMessagesCollectorPlugin"
+        <plugin name="Fruitcake\MagentoDebugbar\Plugin\AddMessagesCollectorPlugin"
+                type="Fruitcake\MagentoDebugbar\Plugin\AddMessagesCollectorPlugin"
                 sortOrder="110" />
-        <plugin name="MagentoHackathon\Toolbar\Plugin\AddTimeDataCollectorPlugin"
-                type="MagentoHackathon\Toolbar\Plugin\AddTimeDataCollectorPlugin"
+        <plugin name="Fruitcake\MagentoDebugbar\Plugin\AddTimeDataCollectorPlugin"
+                type="Fruitcake\MagentoDebugbar\Plugin\AddTimeDataCollectorPlugin"
                 sortOrder="120" />
-        <plugin name="MagentoHackathon\Toolbar\Plugin\AddEventCollectorPlugin"
-                type="MagentoHackathon\Toolbar\Plugin\AddEventCollectorPlugin"
+        <plugin name="Fruitcake\MagentoDebugbar\Plugin\AddEventCollectorPlugin"
+                type="Fruitcake\MagentoDebugbar\Plugin\AddEventCollectorPlugin"
                 sortOrder="130" />
     </type>
 </config>

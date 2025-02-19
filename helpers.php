@@ -1,17 +1,17 @@
 <?php
 
-if ( ! function_exists('toolbar')) {
+if ( ! function_exists('debugbar')) {
 
     /**
-     * @return MagentoHackathon\Toolbar\Toolbar
+     * @return \Fruitcake\MagentoDebugbar\MagentoDebugbar
      */
-    function toolbar()
+    function debugbar()
     {
-        /** @var \MagentoHackathon\Toolbar\Toolbar $toolbar */
-        $toolbar = \Magento\Framework\App\ObjectManager::getInstance()
-            ->get(\MagentoHackathon\Toolbar\Toolbar::class);
+        /** @var \Fruitcake\MagentoDebugbar\MagentoDebugbar $debugbar */
+        $debugbar = \Magento\Framework\App\ObjectManager::getInstance()
+            ->get(\Fruitcake\MagentoDebugbar\MagentoDebugbar::class);
 
-        return $toolbar;
+        return $debugbar;
     }
 }
 
@@ -23,12 +23,12 @@ if ( ! function_exists('debug')) {
      */
     function debug(...$args)
     {
-        /** @var \MagentoHackathon\Toolbar\Toolbar $toolbar */
-        $toolbar = \Magento\Framework\App\ObjectManager::getInstance()
-            ->get(\MagentoHackathon\Toolbar\Toolbar::class);
+        /** @var \Fruitcake\MagentoDebugbar\MagentoDebugbar $debugbar */
+        $debugbar = \Magento\Framework\App\ObjectManager::getInstance()
+            ->get(\Fruitcake\MagentoDebugbar\MagentoDebugbar::class);
 
         foreach ($args as $value) {
-            $toolbar->addMessage($value);
+            $debugbar->addMessage($value);
         }
     }
 }

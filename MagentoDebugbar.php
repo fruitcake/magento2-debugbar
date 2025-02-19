@@ -1,18 +1,19 @@
 <?php
 
-namespace MagentoHackathon\Toolbar;
+namespace Fruitcake\MagentoDebugbar;
 
 use DebugBar\DebugBar;
 use DebugBar\DataCollector\DataCollectorInterface;
+use Fruitcake\MagentoDebugbar\DataCollector\MessagesCollector;
+use Fruitcake\MagentoDebugbar\Provider\StateProvider;
+use Fruitcake\MagentoDebugbar\Storage\FilesystemStorage;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\Framework\App\Response\Http as HttpResponse;
-use MagentoHackathon\Toolbar\Provider\StateProvider;
-use MagentoHackathon\Toolbar\Storage\FilesystemStorage;
 use Magento\Framework\App\State;
 
-class Toolbar extends DebugBar
+class MagentoDebugbar extends DebugBar
 {
     /** @var  HttpRequest */
     protected $request;
@@ -29,7 +30,6 @@ class Toolbar extends DebugBar
     protected $useRequireJs = true;
 
     /**
-     * Toolbar constructor.
      *
      * @param UrlInterface $url
      * @param FilesystemStorage $storage
@@ -80,7 +80,7 @@ class Toolbar extends DebugBar
     public function addMessage($message, $label = 'info')
     {
         if ($this->hasCollector('messages')) {
-            /** @var \MagentoHackathon\Toolbar\DataCollector\MessagesCollector $collector */
+            /** @var MessagesCollector $collector */
             $collector = $this->getCollector('messages');
             $collector->addMessage($message, $label);
         }
@@ -105,17 +105,15 @@ class Toolbar extends DebugBar
 
         // Add our own custom CSS
         $this->jsRenderer->addAssets([
-            'toolbar.css',
-            'font-awesome.css'
+            'theme.css',
         ], [], __DIR__ . '/view/base/web');
 
         // Use RequireJS to include jQuery
         $this->jsRenderer->disableVendor('jquery');
-        $this->jsRenderer->disableVendor('fontawesome');
         $this->jsRenderer->setUseRequireJs(true);
 
         // Enable the openHandler and bind to XHR requests
-        $this->jsRenderer->setOpenHandlerUrl($this->url->getUrl('hackathon_toolbar/openhandler/handle'));
+        $this->jsRenderer->setOpenHandlerUrl($this->url->getUrl('_debugbar/openhandler/handle'));
         $this->jsRenderer->setBindAjaxHandlerToXHR(true);
 
         return $this->jsRenderer;
@@ -126,19 +124,19 @@ class Toolbar extends DebugBar
      */
     public function modifyResponse(HttpResponse $response)
     {
-        if ( ! $this->state->shouldToolbarRun()) {
+        if ( ! $this->state->shouldDebugbarRun()) {
             // Don't collect or store on internal routes
             return;
         } elseif ($response->isRedirect()) {
             // On redirects, stack the data for the next request
             $this->stackData();
         } elseif ($this->state->isAjaxRequest() || $response instanceof Json) {
-            // On XHR requests, send the header so it can be shown by the active toolbar
+            // On XHR requests, send the header so it can be shown by the active debugbar
             $this->sendDataInHeaders(true);
-        } elseif($this->state->isToolbarVisible()) {
-            // Inject the Toolbar into the HTML
+        } elseif($this->state->isDebugbarVisible()) {
+            // Inject the Debugbar into the HTML
             $this->appState->emulateAreaCode('frontend', function() use($response) {
-                $this->injectToolbar($response);
+                $this->injectDebugbar($response);
             });
         } else {
             // Just collect the data without rendering (for later viewing)ß
@@ -147,11 +145,11 @@ class Toolbar extends DebugBar
     }
 
     /**
-     * Inject the toolbar in the HTML response.
+     * Inject the debugbar in the HTML response.
      *
      * @param HttpResponse $response
      */
-    protected function injectToolbar(HttpResponse $response)
+    protected function injectDebugbar(HttpResponse $response)
     {
         $content = (string) $response->getBody();
         $renderer = $this->getJavascriptRenderer();
@@ -161,8 +159,8 @@ class Toolbar extends DebugBar
             return;
         }
 
-        $toolbar = $renderer->renderHead() . $renderer->render();
-        $content = substr($content, 0, $pos) . $toolbar . substr($content, $pos);
+        $widget = $renderer->renderHead() . $renderer->render();
+        $content = substr($content, 0, $pos) . $widget . substr($content, $pos);
 
         // Update the response content
         $response->setBody($content);

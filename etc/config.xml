@@ -2,15 +2,13 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <dev>
-            <hackathon_toolbar>
+            <debugbar>
                 <enabled>1</enabled>
-            </hackathon_toolbar>
-            <hackathon_toolbar_collectors>
-                <magento>1</magento>
-                <messages>1</messages>
-                <time>1</time>
-                <event>1</event>
-            </hackathon_toolbar_collectors>
+                <magento_collector>1</magento_collector>
+                <messages_collector>1</messages_collector>
+                <time_collector>1</time_collector>
+                <event_collector>1</event_collector>
+            </debugbar>
         </dev>
     </default>
 </config>

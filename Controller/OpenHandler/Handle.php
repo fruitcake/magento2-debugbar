@@ -1,8 +1,8 @@
 <?php
 
-namespace MagentoHackathon\Toolbar\Controller\OpenHandler;
+namespace Fruitcake\MagentoDebugbar\Controller\OpenHandler;
 
-use MagentoHackathon\Toolbar\Toolbar;
+use Fruitcake\MagentoDebugbar\MagentoDebugbar;
 use DebugBar\OpenHandler;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
@@ -13,12 +13,12 @@ use Magento\Framework\Controller\ResultInterface;
 
 class Handle extends Action
 {
-    /** @var Toolbar  */
-    protected $toolbar;
+    /** @var MagentoDebugbar  */
+    protected $debugbar;
 
-    public function __construct(Context $context, Toolbar $toolbar)
+    public function __construct(Context $context, MagentoDebugbar $debugbar)
     {
-        $this->toolbar = $toolbar;
+        $this->debugbar = $debugbar;
 
         parent::__construct($context);
     }
@@ -35,7 +35,7 @@ class Handle extends Action
         $result = $this->resultFactory->create(ResultFactory::TYPE_RAW);
         $result->setHeader('content-type', 'application/json');
 
-        $openHandler = new OpenHandler($this->toolbar);
+        $openHandler = new OpenHandler($this->debugbar);
         $data = $openHandler->handle(null, false, false);
 
         $result->setContents($data);

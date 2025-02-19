@@ -1,13 +1,13 @@
 <?php
 
-namespace MagentoHackathon\Toolbar\Controller\Assets;
+namespace Fruitcake\MagentoDebugbar\Controller\Assets;
 
 class Js extends Base
 {
     public function execute()
     {
         return $this->createResponse('text/javascript', function(){
-            $this->toolbar->getJavascriptRenderer()->dumpJsAssets();
+            $this->debugbar->getJavascriptRenderer()->dumpJsAssets();
         });
     }
 }

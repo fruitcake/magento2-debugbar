@@ -1,8 +1,8 @@
 <?php
 
-namespace MagentoHackathon\Toolbar\Controller\Assets;
+namespace Fruitcake\MagentoDebugbar\Controller\Assets;
 
-use MagentoHackathon\Toolbar\Toolbar;
+use Fruitcake\MagentoDebugbar\MagentoDebugbar;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\Raw;
@@ -11,12 +11,12 @@ use Magento\Framework\Controller\ResultInterface;
 
 abstract class Base extends Action
 {
-    /** @var Toolbar  */
-    protected $toolbar;
+    /** @var MagentoDebugbar  */
+    protected $debugbar;
 
-    public function __construct(Context $context, Toolbar $toolbar)
+    public function __construct(Context $context, MagentoDebugbar $debugbar)
     {
-        $this->toolbar = $toolbar;
+        $this->debugbar = $debugbar;
 
         parent::__construct($context);
     }

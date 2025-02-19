@@ -1,27 +1,27 @@
 {
-  "name": "magento-hackathon/magento2-toolbar",
-  "description": "Toolbar for Magento 2",
-  "keywords": ["magento", "magento2", "toolbar", "debugbar", "profiler", "debug"],
+  "name": "fruitcake/magento2-debugbar",
+  "description": "Debugbar for Magento 2",
+  "keywords": ["magento", "magento2", "toolbar", "debugbar", "profiler", "debug", "dev"],
   "type": "magento2-module",
   "authors": [
     {
-      "name": "Barry vd. Heuvel"
+      "name": "Fruitcake"
     },
     {
-      "name": "Elze Kool"
+      "name": "Barry vd. Heuvel"
     }
   ],
   "license": [
     "OSL-3.0"
   ],
   "require": {
-    "php": ">=7.0.0",
-    "magento/framework": "~101.0",
-    "maximebf/debugbar": "~1.15.0"
+    "php": "^8.1",
+    "magento/framework": "~103.0",
+    "php-debugbar/php-debugbar": "~2.1.3"
   },
   "autoload": {
     "psr-4": {
-      "MagentoHackathon\\Toolbar\\": ""
+      "Fruitcake\\MagentoDebugbar\\": ""
     },
     "files": [
       "registration.php",

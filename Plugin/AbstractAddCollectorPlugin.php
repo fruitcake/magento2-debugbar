@@ -1,12 +1,12 @@
 <?php
 
-namespace MagentoHackathon\Toolbar\Plugin;
+namespace Fruitcake\MagentoDebugbar\Plugin;
 
-use MagentoHackathon\Toolbar\Toolbar;
+use Fruitcake\MagentoDebugbar\MagentoDebugbar;
 use DebugBar\DataCollector\DataCollectorInterface;
 
 /**
- * Plugin to add a collector to the toolbar
+ * Plugin to add a collector to the Debugbar
  *
  * Example usage in etc/di.xml:
  *
@@ -17,8 +17,8 @@ use DebugBar\DataCollector\DataCollectorInterface;
  */
 abstract class AbstractAddCollectorPlugin
 {
-    /** @var  Toolbar */
-    protected $toolbar;
+    /** @var  MagentoDebugbar */
+    protected $debugbar;
 
     /** @var DataCollectorInterface  */
     protected $collector;
@@ -26,12 +26,12 @@ abstract class AbstractAddCollectorPlugin
     /**
      * Constructor
      *
-     * @param Toolbar $toolbar
+     * @param MagentoDebugbar $debugbar
      * @param DataCollectorInterface $collector
      */
-    public function __construct(Toolbar $toolbar, DataCollectorInterface $collector)
+    public function __construct(MagentoDebugbar $debugbar, DataCollectorInterface $collector)
     {
-        $this->toolbar = $toolbar;
+        $this->debugbar = $debugbar;
         $this->collector = $collector;
     }
 
@@ -41,6 +41,6 @@ abstract class AbstractAddCollectorPlugin
      */
     public function beforeLaunch()
     {
-        $this->toolbar->addCollector($this->collector);
+        $this->debugbar->addCollector($this->collector);
     }
 }

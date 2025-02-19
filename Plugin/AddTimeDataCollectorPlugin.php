@@ -1,8 +1,8 @@
 <?php
 
-namespace MagentoHackathon\Toolbar\Plugin;
+namespace Fruitcake\MagentoDebugbar\Plugin;
 
-use MagentoHackathon\Toolbar\Toolbar;
+use Fruitcake\MagentoDebugbar\MagentoDebugbar;
 use DebugBar\DataCollector\TimeDataCollector;
 
 /**
@@ -11,8 +11,8 @@ use DebugBar\DataCollector\TimeDataCollector;
  */
 class AddTimeDataCollectorPlugin extends AbstractAddCollectorPlugin
 {
-    public function __construct(Toolbar $toolbar, TimeDataCollector $collector)
+    public function __construct(MagentoDebugbar $debugbar, TimeDataCollector $collector)
     {
-        parent::__construct($toolbar, $collector);
+        parent::__construct($debugbar, $collector);
     }
 }

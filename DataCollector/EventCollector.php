@@ -1,8 +1,8 @@
 <?php
-namespace MagentoHackathon\Toolbar\DataCollector;
+namespace Fruitcake\MagentoDebugbar\DataCollector;
 
-use MagentoHackathon\Toolbar\DataFormatter\SimpleFormatter;
 use DebugBar\DataCollector\TimeDataCollector;
+use Fruitcake\MagentoDebugbar\DataFormatter\SimpleFormatter;
 
 class EventCollector extends TimeDataCollector
 {

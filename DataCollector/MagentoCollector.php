@@ -1,6 +1,6 @@
 <?php
 
-namespace MagentoHackathon\Toolbar\DataCollector;
+namespace Fruitcake\MagentoDebugbar\DataCollector;
 
 use DebugBar\DataCollector\DataCollector;
 use DebugBar\DataCollector\Renderable;

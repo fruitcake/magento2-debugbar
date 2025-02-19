@@ -1,0 +1,26 @@
+div.phpdebugbar,
+div.phpdebugbar-openhandler {
+    --debugbar-magento-orange: #eb5202;
+    --debugbar-badge-text: var(--debugbar-magento-orange);
+    --debugbar-badge-active: var(--debugbar-magento-orange);
+
+}
+
+/* Dark mode */
+div.phpdebugbar[data-theme='dark'],
+div.phpdebugbar-openhandler[data-theme='dark'] {
+    --debugbar-badge-text: var(--debugbar-magento-orange);
+    --debugbar-badge-active: var(--debugbar-magento-orange);
+}
+
+
+a.phpdebugbar-restore-btn:after {
+    background: url(data:image/svg+xml;base64,PHN2ZyBiYXNlUHJvZmlsZT0idGlueSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMzUiIGhlaWdodD0iNDEiIHZpZXdCb3g9Ii0wLjE1NCAwIDU0IDYyIj48ZyBmaWxsPSIjRTg1RDIyIj48cGF0aCBkPSJNMjYuODQ1IDguODU3Ii8+PHBhdGggZD0iTTUzLjY5MiAxNS41djMxbC03LjY3IDQuNDN2LTMxTDI2Ljg0NCA4Ljg1NiA3LjY3IDE5LjkyNlY1MC45M0wwIDQ2LjV2LTMxTDI2Ljg0NSAwek0yNi44NDcgNjJMMTUuMzQgNTUuMzU1VjI0LjM1N2w3LjY3LTQuNDNWNTAuOTNsMy44MzUgMi4zMjcgMy44MzctMi4zMjd2LTMxbDcuNjcgNC40Mjd2MzAuOTk4eiIvPjwvZz48L3N2Zz4=) no-repeat 6px center / 20px 20px !important;
+}
+
+
+div.phpdebugbar-openhandler .phpdebugbar-openhandler-header {
+    background: url(data:image/svg+xml;base64,PHN2ZyBiYXNlUHJvZmlsZT0idGlueSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMzUiIGhlaWdodD0iNDEiIHZpZXdCb3g9Ii0wLjE1NCAwIDU0IDYyIj48ZyBmaWxsPSIjRTg1RDIyIj48cGF0aCBkPSJNMjYuODQ1IDguODU3Ii8+PHBhdGggZD0iTTUzLjY5MiAxNS41djMxbC03LjY3IDQuNDN2LTMxTDI2Ljg0NCA4Ljg1NiA3LjY3IDE5LjkyNlY1MC45M0wwIDQ2LjV2LTMxTDI2Ljg0NSAwek0yNi44NDcgNjJMMTUuMzQgNTUuMzU1VjI0LjM1N2w3LjY3LTQuNDNWNTAuOTNsMy44MzUgMi4zMjcgMy44MzctMi4zMjd2LTMxbDcuNjcgNC40Mjd2MzAuOTk4eiIvPjwvZz48L3N2Zz4=) no-repeat 11px center / 20px 20px !important;
+    padding: 4px 4px 6px 38px;
+    margin: 0px !important;
+}

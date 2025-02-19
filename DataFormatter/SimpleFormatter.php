@@ -1,6 +1,6 @@
 <?php
 
-namespace MagentoHackathon\Toolbar\DataFormatter;
+namespace Fruitcake\MagentoDebugbar\DataFormatter;
 
 use DebugBar\DataFormatter\DataFormatter;
 

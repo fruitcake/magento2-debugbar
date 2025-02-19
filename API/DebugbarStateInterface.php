@@ -1,24 +1,24 @@
 <?php
 
-namespace MagentoHackathon\Toolbar\API;
+namespace Fruitcake\MagentoDebugbar\API;
 
 use DebugBar\DataCollector\DataCollectorInterface;
 
-interface ToolbarStateInterface
+interface DebugbarStateInterface
 {
     /**
-     * Check if the Toolbar should be enabled.
+     * Check if the Debugbar should be enabled.
      *
      * @return bool
      */
-    public function isToolbarEnabled();
+    public function isDebugbarEnabled();
 
     /**
-     * Check if the Toolbar should run at all.
+     * Check if the Debugbar should run at all.
      *
      * @return bool
      */
-    public function shouldToolbarRun();
+    public function shouldDebugbarRun();
 
     /**
      * Determine if a specific collector should run.

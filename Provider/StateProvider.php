@@ -1,13 +1,13 @@
 <?php
 
-namespace MagentoHackathon\Toolbar\Provider;
+namespace Fruitcake\MagentoDebugbar\Provider;
 
 use DebugBar\DataCollector\DataCollectorInterface;
+use Fruitcake\MagentoDebugbar\API\DebugbarStateInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Request\Http as HttpRequest;
-use MagentoHackathon\Toolbar\API\ToolbarStateInterface;
 
-class StateProvider implements ToolbarStateInterface
+class StateProvider implements DebugbarStateInterface
 {
     /** @var  ScopeConfigInterface */
     protected $scopeConfig;
@@ -22,23 +22,23 @@ class StateProvider implements ToolbarStateInterface
     }
 
     /**
-     * Check if the Toolbar should be enabled.
+     * Check if the Debugbar should be enabled.
      *
      * @return bool
      */
-    public function isToolbarEnabled()
+    public function isDebugbarEnabled()
     {
-        return $this->getConfigValue('dev/hackathon_toolbar/enabled');
+        return $this->getConfigValue('dev/debugbar/enabled');
     }
 
     /**
-     * Check if the Toolbar should run at all.
+     * Check if the Debugbar should run at all.
      *
      * @return bool
      */
-    public function shouldToolbarRun()
+    public function shouldDebugbarRun()
     {
-        return $this->isToolbarEnabled() && ! $this->isInternalToolbarRequest();
+        return $this->isDebugbarEnabled() && ! $this->isInternalDebugbarRequest();
     }
 
     /**
@@ -49,21 +49,21 @@ class StateProvider implements ToolbarStateInterface
      */
     public function shouldCollectorRun(DataCollectorInterface $collector)
     {
-        if ( ! $this->shouldToolbarRun()) {
+        if ( ! $this->shouldDebugbarRun()) {
             return false;
         }
 
-        $configPath = 'dev/hackathon_toolbar_collectors/' . $collector->getName();
+        $configPath = 'dev/debugbar/' . $collector->getName() .'_collector';
 
         return (bool) $this->scopeConfig->getValue($configPath);
     }
 
     /**
-     * Check if the Toolbar should be visible on the frontend.
+     * Check if the Debugbar should be visible on the frontend.
      *
      * @return bool
      */
-    public function isToolbarVisible()
+    public function isDebugbarVisible()
     {
         return true;
     }
@@ -79,13 +79,13 @@ class StateProvider implements ToolbarStateInterface
     }
 
     /**
-     * Check if the current request is an internal Toolbar request.
+     * Check if the current request is an internal Debugbar request.
      *
      * @return bool
      */
-    protected function isInternalToolbarRequest()
+    protected function isInternalDebugbarRequest()
     {
-        return $this->request->getModuleName() === 'hackathon_toolbar';
+        return $this->request->getModuleName() === 'debugbar';
     }
 
     /**

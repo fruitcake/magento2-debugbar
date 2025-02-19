@@ -1,18 +1,20 @@
 <?php
-namespace MagentoHackathon\Toolbar\Plugin;
+namespace Fruitcake\MagentoDebugbar\Plugin;
 
-use MagentoHackathon\Toolbar\DataCollector\EventCollector;
-use MagentoHackathon\Toolbar\DataCollector\ObserverCollector;
-use MagentoHackathon\Toolbar\Toolbar;
+use Fruitcake\MagentoDebugbar\DataCollector\EventCollector;
+use Fruitcake\MagentoDebugbar\MagentoDebugbar;
 use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Event\ConfigInterface;
 
 /**
- * Plugin to add Toolbar to the Response add the
+ * Plugin to add Debugbar to the Response add the
  * end of the body
  */
 class EventManagerPlugin
 {
+    /** @var MagentoDebugbar  */
+    protected $debugbar;
+
     /** @var EventCollector  */
     protected $eventCollector;
 
@@ -23,11 +25,11 @@ class EventManagerPlugin
     protected $config;
 
     public function __construct(
-        Toolbar $toolbar,
+        MagentoDebugbar $debugbar,
         EventCollector $eventCollector,
         ConfigInterface $config
     ) {
-        $this->toolbar = $toolbar;
+        $this->debugbar = $debugbar;
         $this->eventCollector = $eventCollector;
         $this->config = $config;
     }
@@ -42,7 +44,7 @@ class EventManagerPlugin
         $res = $proceed($eventName, $data);
         $end = microtime(true);
 
-        if ($this->toolbar->shouldCollectorRun($this->eventCollector)) {
+        if ($this->debugbar->shouldCollectorRun($this->eventCollector)) {
             if ($observers = $this->config->getObservers($eventName)) {
                 $data['__observers'] = $observers;
             }

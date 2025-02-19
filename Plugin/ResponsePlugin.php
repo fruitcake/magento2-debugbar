@@ -1,34 +1,37 @@
 <?php
-namespace MagentoHackathon\Toolbar\Plugin;
+namespace Fruitcake\MagentoDebugbar\Plugin;
 
+use Fruitcake\MagentoDebugbar\MagentoDebugbar;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\View\LayoutInterface;
-use MagentoHackathon\Toolbar\Toolbar;
 
 /**
- * Plugin to add Toolbar to the Response add the
+ * Plugin to add Debugbar to the Response add the
  * end of the body
  */
 class ResponsePlugin
 {
+    /** @var MagentoDebugbar  */
+    protected $debugbar;
+
     /**
      * Constructor
      *
-     * @param Toolbar $toolbar
+     * @param MagentoDebugbar $debugbar
      */
-    public function __construct(Toolbar $toolbar)
+    public function __construct(MagentoDebugbar $debugbar)
     {
-        $this->toolbar = $toolbar;
+        $this->debugbar = $debugbar;
     }
 
     /**
-     * Add our toolbar to the response
+     * Add our debugbar to the response
      *
      * @param ResponseInterface $response
      */
     public function beforeSendResponse(ResponseInterface $response)
     {
-        $this->toolbar->modifyResponse($response);
+        $this->debugbar->modifyResponse($response);
     }
 
 }

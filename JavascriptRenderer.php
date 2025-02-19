@@ -1,9 +1,8 @@
 <?php
 
-namespace MagentoHackathon\Toolbar;
+namespace Fruitcake\MagentoDebugbar;
 
 use DebugBar\JavascriptRenderer as BaseJavascriptRenderer;
-use MagentoHackathon\Toolbar\Helper\Data as Helper;
 use Magento\Framework\UrlInterface;
 
 class JavascriptRenderer extends BaseJavascriptRenderer
@@ -11,7 +10,7 @@ class JavascriptRenderer extends BaseJavascriptRenderer
     /** @var  UrlInterface */
     protected $url;
 
-    public function __construct(Toolbar $debugBar, UrlInterface $url)
+    public function __construct(MagentoDebugbar $debugBar, UrlInterface $url)
     {
         $this->url = $url;
 
@@ -25,8 +24,8 @@ class JavascriptRenderer extends BaseJavascriptRenderer
      */
     public function renderHead()
     {
-        $cssUrl = $this->url->getUrl('hackathon_toolbar/assets/css?v=' . $this->getAssetsHash('css'));
-        $jsUrl = $this->url->getUrl('hackathon_toolbar/assets/js?v=' . $this->getAssetsHash('js'));
+        $cssUrl = $this->url->getUrl('_debugbar/assets/css?v=' . $this->getAssetsHash('css'));
+        $jsUrl = $this->url->getUrl('_debugbar/assets/js?v=' . $this->getAssetsHash('js'));
 
         $html  = "<link rel='stylesheet' type='text/css' property='stylesheet' href='{$cssUrl}'>";
         $html .= "<script type='text/javascript' src='{$jsUrl}'></script>";

@@ -1,6 +1,6 @@
 <?php
 
-namespace MagentoHackathon\Toolbar\Storage;
+namespace Fruitcake\MagentoDebugbar\Storage;
 
 use DebugBar\Storage\StorageInterface;
 use Magento\Framework\Filesystem;
@@ -12,7 +12,7 @@ class FilesystemStorage implements StorageInterface
     /** @var Filesystem */
     protected $filesystem;
 
-    protected $dirname = 'toolbar';
+    protected $dirname = 'debugbar';
 
     /**
      * FilesystemStorage constructor.

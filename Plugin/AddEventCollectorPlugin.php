@@ -1,9 +1,9 @@
 <?php
 
-namespace MagentoHackathon\Toolbar\Plugin;
+namespace Fruitcake\MagentoDebugbar\Plugin;
 
-use MagentoHackathon\Toolbar\DataCollector\EventCollector;
-use MagentoHackathon\Toolbar\Toolbar;
+use Fruitcake\MagentoDebugbar\DataCollector\EventCollector;
+use Fruitcake\MagentoDebugbar\MagentoDebugbar;
 
 /**
  * Adds the Magento collector
@@ -11,8 +11,8 @@ use MagentoHackathon\Toolbar\Toolbar;
  */
 class AddEventCollectorPlugin extends AbstractAddCollectorPlugin
 {
-    public function __construct(Toolbar $toolbar, EventCollector $collector)
+    public function __construct(MagentoDebugbar $debugbar, EventCollector $collector)
     {
-        parent::__construct($toolbar, $collector);
+        parent::__construct($debugbar, $collector);
     }
 }
