@@ -4,6 +4,7 @@
         <dev>
             <debugbar>
                 <enabled>1</enabled>
+                <enabled_admin>0</enabled_admin>
                 <magento_collector>1</magento_collector>
                 <messages_collector>1</messages_collector>
                 <time_collector>1</time_collector>

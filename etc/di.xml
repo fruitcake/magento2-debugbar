@@ -17,4 +17,19 @@
                 type="Fruitcake\MagentoDebugbar\Plugin\AddEventCollectorPlugin"
                 sortOrder="130" />
     </type>
+
+    <type name="Magento\Framework\App\ResponseInterface">
+        <plugin name="Fruitcake\MagentoDebugbar\Plugin\ResponsePlugin"
+                type="Fruitcake\MagentoDebugbar\Plugin\ResponsePlugin"
+                sortOrder="99"
+        />
+    </type>
+
+    <type name="Magento\Framework\Event\ManagerInterface">
+        <plugin name="Fruitcake\MagentoDebugbar\Plugin\EventManagerPlugin"
+                type="Fruitcake\MagentoDebugbar\Plugin\EventManagerPlugin"
+                sortOrder="1"
+        />
+    </type>
+
 </config>

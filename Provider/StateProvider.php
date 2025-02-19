@@ -4,6 +4,7 @@ namespace Fruitcake\MagentoDebugbar\Provider;
 
 use DebugBar\DataCollector\DataCollectorInterface;
 use Fruitcake\MagentoDebugbar\API\DebugbarStateInterface;
+use Magento\Framework\App\Area;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Request\Http as HttpRequest;
 
@@ -15,10 +16,14 @@ class StateProvider implements DebugbarStateInterface
     /** @var  HttpRequest */
     protected $request;
 
-    public function __construct(ScopeConfigInterface $scopeConfig, HttpRequest $request)
+    /** @var \Magento\Framework\App\State  */
+    protected $state;
+
+    public function __construct(ScopeConfigInterface $scopeConfig, HttpRequest $request,  \Magento\Framework\App\State $state)
     {
         $this->scopeConfig = $scopeConfig;
         $this->request = $request;
+        $this->state = $state;
     }
 
     /**
@@ -28,7 +33,16 @@ class StateProvider implements DebugbarStateInterface
      */
     public function isDebugbarEnabled()
     {
-        return $this->getConfigValue('dev/debugbar/enabled');
+        $enabled = $this->getConfigValue('dev/debugbar/enabled');
+        if (!$enabled) {
+            return false;
+        }
+
+        if ($this->isAdminRequest()) {
+            return $this->getConfigValue('dev/debugbar/enabled_admin');
+        }
+
+        return true;
     }
 
     /**
@@ -76,6 +90,20 @@ class StateProvider implements DebugbarStateInterface
     public function isAjaxRequest()
     {
         return $this->request->isAjax();
+    }
+
+    /**
+     * Check if the current request is an internal Debugbar request.
+     *
+     * @return bool
+     */
+    protected function isAdminRequest()
+    {
+        try {
+            return $this->state->getAreaCode() === Area::AREA_ADMINHTML;
+        } catch (\Magento\Framework\Exception\LocalizedException $e) {
+            return false;
+        }
     }
 
     /**

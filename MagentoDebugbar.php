@@ -12,6 +12,7 @@ use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\State;
+use Magento\Framework\App\ResponseInterface;
 
 class MagentoDebugbar extends DebugBar
 {
@@ -120,9 +121,9 @@ class MagentoDebugbar extends DebugBar
     }
 
     /**
-     * @param HttpResponse $response
+     * @param ResponseInterface $response
      */
-    public function modifyResponse(HttpResponse $response)
+    public function modifyResponse(ResponseInterface $response)
     {
         if ( ! $this->state->shouldDebugbarRun()) {
             // Don't collect or store on internal routes

@@ -7,7 +7,12 @@
                 <field id="enabled" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment>Enable the Debugbar on all requests.</comment>
+                    <comment>Enable the Debugbar.</comment>
+                </field>
+                <field id="enabled_admin" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled in Admin Backend</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable the Debugbar also in the back-end.</comment>
                 </field>
                 <field id="magento_collector" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Magento Collector</label>
