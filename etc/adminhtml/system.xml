@@ -46,6 +46,14 @@
                         <field id="dev/debugbar/enabled">1</field>
                     </depends>
                 </field>
+                <field id="queries_collector" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Query Collector</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Shows queries. Note: You need to add the Profiler class to your app/etc/env.php. See https://experienceleague.adobe.com/en/docs/commerce-operations/configuration-guide/storage/db-profiler</comment>
+                    <depends>
+                        <field id="dev/debugbar/enabled">1</field>
+                    </depends>
+                </field>
             </group>
         </section>
     </system>

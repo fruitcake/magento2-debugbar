@@ -10,26 +10,15 @@
         <plugin name="Fruitcake\MagentoDebugbar\Plugin\AddMessagesCollectorPlugin"
                 type="Fruitcake\MagentoDebugbar\Plugin\AddMessagesCollectorPlugin"
                 sortOrder="110" />
+        <plugin name="Fruitcake\MagentoDebugbar\Plugin\AddQueryCollectorPlugin"
+                type="Fruitcake\MagentoDebugbar\Plugin\AddQueryCollectorPlugin"
+                sortOrder="120" />
         <plugin name="Fruitcake\MagentoDebugbar\Plugin\AddTimeDataCollectorPlugin"
                 type="Fruitcake\MagentoDebugbar\Plugin\AddTimeDataCollectorPlugin"
-                sortOrder="120" />
+                sortOrder="130" />
         <plugin name="Fruitcake\MagentoDebugbar\Plugin\AddEventCollectorPlugin"
                 type="Fruitcake\MagentoDebugbar\Plugin\AddEventCollectorPlugin"
-                sortOrder="130" />
-    </type>
-
-    <type name="Magento\Framework\App\ResponseInterface">
-        <plugin name="Fruitcake\MagentoDebugbar\Plugin\ResponsePlugin"
-                type="Fruitcake\MagentoDebugbar\Plugin\ResponsePlugin"
-                sortOrder="99"
-        />
-    </type>
-
-    <type name="Magento\Framework\Event\ManagerInterface">
-        <plugin name="Fruitcake\MagentoDebugbar\Plugin\EventManagerPlugin"
-                type="Fruitcake\MagentoDebugbar\Plugin\EventManagerPlugin"
-                sortOrder="1"
-        />
+                sortOrder="140" />
     </type>
 
 </config>
