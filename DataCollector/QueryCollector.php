@@ -5,6 +5,7 @@ use DebugBar\DataCollector\DataCollector;
 use DebugBar\DataCollector\PDO\PDOCollector;
 use DebugBar\DataCollector\TimeDataCollector;
 use Fruitcake\MagentoDebugbar\DataFormatter\SimpleFormatter;
+use Fruitcake\MagentoDebugbar\Profiler\QueryProfiler;
 use Magento\Framework\App\ObjectManager;
 
 class QueryCollector extends PDOCollector
@@ -30,20 +31,27 @@ class QueryCollector extends PDOCollector
         $stmts = [];
 
         /** @var \Zend_Db_Profiler_Query $profile */
-        foreach ($profiler->getQueryProfiles() as $profile) {
+        foreach ($profiler->getQueryProfiles() as $queryId => $profile) {
 
+            if ($profiler instanceof QueryProfiler) {
+                $backtrace = $profiler->getBacktrace($queryId);
+            } else {
+                $backtrace = null;
+            }
+
+            $source = $backtrace ? reset($backtrace) : null;
             $stmts[] = [
                 'duration' => $profile->getElapsedSecs(),
                 'duration_str' => ($profile->getQueryType() == \Zend_Db_Profiler::TRANSACTION) ? '' : $this->formatDuration($profile->getElapsedSecs()),
                 'sql' => $profile->getQuery(),
-                'params' => (object) $profile->getQueryParams(),
+                'backtrace' => $backtrace ? array_values($backtrace) : null,
+                'xdebug_link' => ($source && is_object($source)) ? $this->getXdebugLink($source->file ?: '', $source->line) : null,
             ];
 
             if ($this->timeCollector !== null) {
                 $this->timeCollector->addMeasure(str_replace("\n", '', $profile->getQuery()), $profile->getStartedMicrotime(), $profile->getStartedMicrotime() + $profile->getElapsedSecs(), array(), 'database', 'database');
             }
         }
-
 
         $totalTime = $profiler->getTotalElapsedSecs();
 
@@ -72,7 +80,7 @@ class QueryCollector extends PDOCollector
             'memory_usage_str' => '',
             'peak_memory_usage' => null,
             'peak_memory_usage_str' => '',
-            'statements' => $stmts
+            'statements' => array_values($stmts)
         );
     }
 

@@ -33,6 +33,11 @@ abstract class AbstractAddCollectorPlugin
     {
         $this->debugbar = $debugbar;
         $this->collector = $collector;
+
+        // TODO, make option
+        if (method_exists($collector, 'setEditorLinkTemplate')) {
+            $collector->setEditorLinkTemplate('phpstorm');
+        }
     }
 
     /**
