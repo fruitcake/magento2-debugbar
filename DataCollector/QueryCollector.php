@@ -28,33 +28,36 @@ class QueryCollector extends PDOCollector
         /** @var \Zend_Db_Profiler $profiler */
         $profiler = $this->resourceConnection->getConnection()->getProfiler();
 
+        /** @var \Zend_Db_Profiler_Query[]|false $profiles */
+        $profiles = $profiler->getQueryProfiles();
+
         $stmts = [];
 
-        /** @var \Zend_Db_Profiler_Query $profile */
-        foreach ($profiler->getQueryProfiles() as $queryId => $profile) {
+        if ($profiles) {
+            foreach ($profiler->getQueryProfiles() as $queryId => $profile) {
 
-            if ($profiler instanceof QueryProfiler) {
-                $backtrace = $profiler->getBacktrace($queryId);
-            } else {
-                $backtrace = null;
-            }
+                if ($profiler instanceof QueryProfiler) {
+                    $backtrace = $profiler->getBacktrace($queryId);
+                } else {
+                    $backtrace = null;
+                }
 
-            $source = $backtrace ? reset($backtrace) : null;
-            $stmts[] = [
-                'duration' => $profile->getElapsedSecs(),
-                'duration_str' => ($profile->getQueryType() == \Zend_Db_Profiler::TRANSACTION) ? '' : $this->formatDuration($profile->getElapsedSecs()),
-                'sql' => $profile->getQuery(),
-                'backtrace' => $backtrace ? array_values($backtrace) : null,
-                'xdebug_link' => ($source && is_object($source)) ? $this->getXdebugLink($source->file ?: '', $source->line) : null,
-            ];
+                $source = $backtrace ? reset($backtrace) : null;
+                $stmts[] = [
+                    'duration' => $profile->getElapsedSecs(),
+                    'duration_str' => ($profile->getQueryType() == \Zend_Db_Profiler::TRANSACTION) ? '' : $this->formatDuration($profile->getElapsedSecs()),
+                    'sql' => $profile->getQuery(),
+                    'backtrace' => $backtrace ? array_values($backtrace) : null,
+                    'xdebug_link' => ($source && is_object($source)) ? $this->getXdebugLink($source->file ?: '', $source->line) : null,
+                ];
 
-            if ($this->timeCollector !== null) {
-                $this->timeCollector->addMeasure(str_replace("\n", '', $profile->getQuery()), $profile->getStartedMicrotime(), $profile->getStartedMicrotime() + $profile->getElapsedSecs(), array(), 'database', 'database');
+                if ($this->timeCollector !== null) {
+                    $this->timeCollector->addMeasure(str_replace("\n", '', $profile->getQuery()), $profile->getStartedMicrotime(), $profile->getStartedMicrotime() + $profile->getElapsedSecs(), array(), 'database', 'database');
+                }
             }
         }
 
         $totalTime = $profiler->getTotalElapsedSecs();
-
         if ($this->durationBackground && $totalTime > 0) {
             $start_percent = 0;
             foreach ($stmts as $i => $stmt) {
