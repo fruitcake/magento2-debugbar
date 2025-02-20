@@ -19,6 +19,9 @@
         <plugin name="Fruitcake\MagentoDebugbar\Plugin\AddEventCollectorPlugin"
                 type="Fruitcake\MagentoDebugbar\Plugin\AddEventCollectorPlugin"
                 sortOrder="140" />
+        <plugin name="Fruitcake\MagentoDebugbar\Plugin\AddRequestCollectorPlugin"
+                type="Fruitcake\MagentoDebugbar\Plugin\AddRequestCollectorPlugin"
+                sortOrder="150" />
     </type>
 
 </config>

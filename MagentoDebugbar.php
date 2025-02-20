@@ -7,6 +7,7 @@ use DebugBar\DataCollector\DataCollectorInterface;
 use Fruitcake\MagentoDebugbar\DataCollector\MessagesCollector;
 use Fruitcake\MagentoDebugbar\Provider\StateProvider;
 use Fruitcake\MagentoDebugbar\Storage\FilesystemStorage;
+use Fruitcake\MagentoDebugbar\Storage\RequestIdGenerator;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\App\Request\Http as HttpRequest;
@@ -39,12 +40,14 @@ class MagentoDebugbar extends DebugBar
         UrlInterface $url,
         FilesystemStorage $storage,
         StateProvider $state,
-        State $appState
+        State $appState,
+        RequestIdGenerator $requestIdGenerator
     ) {
         $this->url = $url;
         $this->state = $state;
         $this->appState = $appState;
         $this->setStorage($storage);
+        $this->setRequestIdGenerator($requestIdGenerator);
     }
 
     /**

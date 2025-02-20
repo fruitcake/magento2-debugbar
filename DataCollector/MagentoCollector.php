@@ -4,6 +4,7 @@ namespace Fruitcake\MagentoDebugbar\DataCollector;
 
 use DebugBar\DataCollector\DataCollector;
 use DebugBar\DataCollector\Renderable;
+use Magento\Framework\App\State;
 use Magento\Framework\AppInterface;
 use Magento\Framework\Locale\ResolverInterface;
 use Magento\Framework\App\ProductMetadataInterface;
@@ -16,16 +17,21 @@ class MagentoCollector extends DataCollector implements Renderable
     /** @var ResolverInterface */
     protected $resolver;
 
+    /** @var State  */
+    protected $state;
+
     /**
      * @param ProductMetadataInterface $productMetadata
      * @param ResolverInterface $localeResolver
      */
     public function __construct(
         ProductMetadataInterface $productMetadata,
-        ResolverInterface $localeResolver
+        ResolverInterface $localeResolver,
+        State $state
     ) {
         $this->productMetadata = $productMetadata;
         $this->resolver = $localeResolver;
+        $this->state = $state;
     }
 
     /**
@@ -36,6 +42,13 @@ class MagentoCollector extends DataCollector implements Renderable
         return array(
             "version" => $this->productMetadata->getVersion(),
             "locale" => $this->resolver->getLocale(),
+            'tooltip' => [
+                'PHP Version' => phpversion(),
+                'Magento Version' => $this->productMetadata->getVersion(),
+                'Mode' => $this->state->getMode(),
+                'Area' => $this->state->getAreaCode(),
+                'Locale' => $this->resolver->getLocale(),
+            ]
         );
     }
 
@@ -59,6 +72,10 @@ class MagentoCollector extends DataCollector implements Renderable
                 "map" => "magento.version",
                 "default" => ""
             ),
+            "version:tooltip" => [
+                "map" => "magento.tooltip",
+                "default" => "{}"
+            ],
             "locale" => array(
                 "icon" => "flag",
                 "tooltip" => "Current locale",

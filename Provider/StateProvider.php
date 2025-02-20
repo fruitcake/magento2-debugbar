@@ -52,7 +52,7 @@ class StateProvider implements DebugbarStateInterface
      */
     public function shouldDebugbarRun()
     {
-        return $this->isDebugbarEnabled() && ! $this->isInternalDebugbarRequest();
+        return $this->isDebugbarEnabled() && ! $this->isInternalDebugbarRequest() && ! $this->isSystemRequest();
     }
 
     /**
@@ -90,6 +90,17 @@ class StateProvider implements DebugbarStateInterface
     public function isAjaxRequest()
     {
         return $this->request->isAjax();
+    }
+
+    /**
+     * Ignore requests from system or other tools
+     *
+     * @return bool
+     */
+    public function isSystemRequest()
+    {
+        // TODO check which we can ignore
+        return in_array($this->request->getModuleName(), []);
     }
 
     /**

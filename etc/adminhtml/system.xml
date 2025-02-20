@@ -54,6 +54,14 @@
                         <field id="dev/debugbar/enabled">1</field>
                     </depends>
                 </field>
+                <field id="request_collector" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Request Collector</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Shows Request info</comment>
+                    <depends>
+                        <field id="dev/debugbar/enabled">1</field>
+                    </depends>
+                </field>
             </group>
         </section>
     </system>

@@ -10,6 +10,7 @@
                 <time_collector>1</time_collector>
                 <event_collector>1</event_collector>
                 <queries_collector>1</queries_collector>
+                <request_collector>1</request_collector>
             </debugbar>
         </dev>
     </default>
