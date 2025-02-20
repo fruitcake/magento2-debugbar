@@ -73,7 +73,11 @@ class FilesystemStorage implements StorageInterface
 
         $i = 0;
         $results = array();
-        foreach ($directory->search('*.json', $this->dirname) as $path)
+
+        $files = $directory->search('*.json', $this->dirname);
+        rsort($files);
+
+        foreach ($files as $path)
         {
             if ($i++ < $offset && empty($filters)) {
                 $results[] = null;
