@@ -33,8 +33,19 @@ class QueryCollector extends PDOCollector
 
         $stmts = [];
 
+        if (!$profiler->getEnabled()) {
+            $stmts[] = [
+                'sql' => '# To enable the Database Collector, enable the profiler, see https://experienceleague.adobe.com/en/docs/commerce-operations/configuration-guide/storage/db-profiler and use Fruitcake\\MagentoDebugbar\\Profiler\\QueryProfiler as profiler class for optimal results'
+            ];
+        } elseif (!($profiler instanceof QueryProfiler)) {
+            $stmts[] = [
+                'sql' => '# To enable backtraces, use Fruitcake\\MagentoDebugbar\\Profiler\\QueryProfiler as profiler class'
+            ];
+        }
+
+
         if ($profiles) {
-            foreach ($profiler->getQueryProfiles() as $queryId => $profile) {
+            foreach ($profiles as $queryId => $profile) {
 
                 if ($profiler instanceof QueryProfiler) {
                     $backtrace = $profiler->getBacktrace($queryId);
@@ -47,6 +58,7 @@ class QueryCollector extends PDOCollector
                     'duration' => $profile->getElapsedSecs(),
                     'duration_str' => ($profile->getQueryType() == \Zend_Db_Profiler::TRANSACTION) ? '' : $this->formatDuration($profile->getElapsedSecs()),
                     'sql' => $profile->getQuery(),
+                    'params' => $profile->getQueryParams() ?: null,
                     'backtrace' => $backtrace ? array_values($backtrace) : null,
                     'xdebug_link' => ($source && is_object($source)) ? $this->getXdebugLink($source->file ?: '', $source->line) : null,
                 ];
