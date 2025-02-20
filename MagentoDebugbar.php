@@ -150,7 +150,7 @@ class MagentoDebugbar extends DebugBar
      *
      * @param HttpResponse $response
      */
-    protected function injectDebugbar(HttpResponse $response)
+    protected function injectDebugbar(ResponseInterface $response)
     {
         $content = (string) $response->getBody();
         $renderer = $this->getJavascriptRenderer();
