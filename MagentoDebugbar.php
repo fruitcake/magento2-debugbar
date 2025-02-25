@@ -112,13 +112,8 @@ class MagentoDebugbar extends DebugBar
             'theme.css',
         ], [], __DIR__ . '/view/base/web');
 
-        // Use RequireJS to include jQuery
-        $this->jsRenderer->disableVendor('jquery');
-        $this->jsRenderer->setUseRequireJs(true);
-
         // Enable the openHandler and bind to XHR requests
         $this->jsRenderer->setOpenHandlerUrl($this->url->getUrl('_debugbar/openhandler/handle'));
-        $this->jsRenderer->setBindAjaxHandlerToXHR(true);
 
         return $this->jsRenderer;
     }
@@ -134,7 +129,7 @@ class MagentoDebugbar extends DebugBar
         } elseif ($response->isRedirect()) {
             // On redirects, stack the data for the next request
             $this->stackData();
-        } elseif ($this->state->isAjaxRequest() || $response instanceof Json) {
+        } elseif ($this->state->isAjaxRequest() || $this->state->isGraphQlRequest() || $response instanceof Json) {
             // On XHR requests, send the header so it can be shown by the active debugbar
             $this->sendDataInHeaders(true);
         } elseif($this->state->isDebugbarVisible()) {

@@ -92,6 +92,14 @@ class StateProvider implements DebugbarStateInterface
         return $this->request->isAjax();
     }
 
+    /** Check if it's a GraphQL Request
+     * @return bool
+     */
+    public function isGraphQlRequest()
+    {
+        return str_ends_with($this->request->getUriString(), '/graphql');
+    }
+
     /**
      * Ignore requests from system or other tools
      *
