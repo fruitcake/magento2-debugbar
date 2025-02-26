@@ -17,9 +17,7 @@ class JavascriptRenderer extends BaseJavascriptRenderer
     protected $ajaxHandlerBindToFetch = true;
 
     protected $ajaxHandlerBindToXHR = true;
-
-    protected $ajaxHandlerEnableTab = false;
-
+    
     public function __construct(MagentoDebugbar $debugBar, UrlInterface $url)
     {
         $this->url = $url;
