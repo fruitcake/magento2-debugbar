@@ -22,6 +22,9 @@
         <plugin name="Fruitcake\MagentoDebugbar\Plugin\AddRequestCollectorPlugin"
                 type="Fruitcake\MagentoDebugbar\Plugin\AddRequestCollectorPlugin"
                 sortOrder="150" />
+        <plugin name="Fruitcake\MagentoDebugbar\Plugin\AddTemplateCollectorPlugin"
+                type="Fruitcake\MagentoDebugbar\Plugin\AddTemplateCollectorPlugin"
+                sortOrder="160" />
     </type>
 
 </config>

@@ -11,6 +11,7 @@
                 <event_collector>1</event_collector>
                 <queries_collector>1</queries_collector>
                 <request_collector>1</request_collector>
+                <templates_collector>1</templates_collector>
             </debugbar>
         </dev>
     </default>
