@@ -66,7 +66,7 @@ class RequestCollector extends DataCollector implements DataCollectorInterface, 
         $request = $this->request;
 
         $data = [
-            'path' => $request->getPathInfo(),
+            'path' => $request->getPathInfo() ?: '/',
             'baseUrl' => $request->getDistroBaseUrl(),
             'module' => $request->getModuleName(),
             'controller' => $request->getControllerModule(),
